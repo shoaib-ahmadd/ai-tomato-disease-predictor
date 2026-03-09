@@ -1,4 +1,4 @@
-# 🍅 Tomato Leaf Disease Prediction - Frontend
+# 🍅 Tomato Leaf Disease Prediction
 
 A simple and responsive frontend web application for **Tomato Leaf Disease Prediction** built using **HTML, CSS, and JavaScript**.  
 This interface allows users to upload a tomato leaf image, send it to the backend model API, and view the predicted disease result with confidence score.
