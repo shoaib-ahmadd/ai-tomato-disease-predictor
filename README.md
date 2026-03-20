@@ -1,183 +1,145 @@
-# 🍅 Tomato Leaf Disease Prediction
-
-A simple and responsive frontend web application for **Tomato Leaf Disease Prediction** built using **HTML, CSS, and JavaScript**.  
-This interface allows users to upload a tomato leaf image, send it to the backend model API, and view the predicted disease result with confidence score.
-
----
+# 🍅 AI Tomato Leaf Disease Predictor
 
 ## 📌 Overview
 
-This project is the frontend part of a Tomato Leaf Disease Prediction system.  
-It is designed to work with a backend deep learning model that uses a **4-branch hybrid CNN architecture**:
+This project is an **AI-powered Tomato Leaf Disease Prediction system** that detects and classifies diseases in tomato leaves using deep learning techniques.
 
-- **ResNet**
-- **DenseNet**
-- **MobileNet**
-- **Custom CNN**
+The system consists of a responsive frontend interface integrated with a backend model API. Users can upload an image of a tomato leaf and receive predictions along with confidence scores.
 
-The frontend provides a clean user interface for interacting with the model.
+The model is built using a **Hybrid CNN architecture** combining:
+
+* ResNet
+* DenseNet
+* MobileNet
+* Custom CNN
 
 ---
 
 ## 🚀 Features
 
-- Upload tomato leaf images from local device
-- Preview selected image before prediction
-- Send image to backend API using JavaScript `fetch()`
-- Display predicted disease class
-- Display confidence score
-- Clean and responsive UI
-- Beginner-friendly and easy to integrate with Flask/FastAPI backend
+* 📤 Upload tomato leaf images
+* 🖼️ Image preview before prediction
+* ⚡ Real-time prediction using API
+* 📊 Disease classification with confidence score
+* 💻 Clean and responsive user interface
+* 🔗 Easy integration with Flask / FastAPI backend
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – structure
-- **CSS3** – styling
-- **JavaScript** – client-side logic
-- **Backend API** – Flask / FastAPI
-- **Model** – Hybrid CNN for tomato leaf disease prediction
+* **Frontend:** HTML5, CSS3, JavaScript
+* **Backend:** Flask / FastAPI
+* **Model:** Hybrid CNN (Deep Learning)
+* **Libraries:** TensorFlow / Keras, OpenCV, NumPy
 
 ---
 
 ## 📂 Project Structure
 
 ```bash
-tomato-leaf-disease-prediction-frontend/
+ai-tomato-disease-predictor/
 │
-├── index.html          # Main frontend page
-├── style.css           # Application styling
-├── script.js           # Frontend logic and API calls
-├── assets/             # Images, icons, screenshots
-└── README.md           # Project documentation
+├── index.html
+├── style.css
+├── config.js
+├── 4CNN_Architecture.ipynb
+├── tomato_leaf_disease_hybrid_cnn_v1.keras
+├── temp.jpg
+└── README.md
+```
 
+---
 
-▶️ Getting Started
-1. Clone the repository
-git clone https://github.com/your-username/tomato-leaf-disease-prediction-frontend.git
-2. Open the project folder
-cd tomato-leaf-disease-prediction-frontend
-3. Run the frontend
+## ▶️ Getting Started
 
-You can directly open index.html in the browser
-or use VS Code Live Server for a better local development experience.
+### 1️⃣ Clone the repository
 
-📡 Example API Integration
+```bash
+git clone https://github.com/your-username/ai-tomato-disease-predictor.git
+cd ai-tomato-disease-predictor
+```
 
-Inside script.js, the API call may look like this:
+### 2️⃣ Run the frontend
 
+* Open `index.html` in your browser
+  **OR**
+* Use VS Code Live Server
+
+---
+
+## 📡 API Integration
+
+Update API URL inside your JavaScript file:
+
+```javascript
 const apiUrl = "http://127.0.0.1:5000/predict";
+```
 
-If you deploy the backend, replace it with your hosted API URL:
+For deployed backend:
 
+```javascript
 const apiUrl = "https://your-backend-url.com/predict";
-🧪 Expected Output
+```
 
-After uploading an image, the frontend should display:
+---
 
-Predicted Disease
+## 🧪 Expected Output
 
-Confidence Score
+After uploading an image:
 
-Uploaded Image Preview
+* ✅ Predicted Disease Name
+* 📊 Confidence Score
+* 🖼️ Image Preview
 
-Example:
+**Example:**
 
-Prediction: Early Blight
+```
+Prediction: Early Blight  
 Confidence: 96.42%
-🎯 Use Cases
+```
 
-Plant disease detection demo
+---
 
-AI-based agriculture projects
+## 🎯 Use Cases
 
-ML model frontend integration
+* 🌱 Smart agriculture solutions
+* 🤖 AI-based plant disease detection
+* 🎓 Final year / academic projects
+* 📊 ML model deployment demos
 
-Academic and portfolio projects
+---
 
-End-to-end deep learning deployment showcase
+## 🔮 Future Improvements
 
-🔮 Future Improvements
+* Drag & drop image upload
+* Disease remedies suggestions
+* Loading animation
+* Better error handling
+* Mobile-first UI
+* Dark mode
 
-Drag-and-drop image upload
+---
 
-Disease details and remedy suggestions
+## 👨‍💻 Contributors
 
-Loading spinner during prediction
+* **Shoaib Ahmad**
+* **Rafiq**
 
-Better error handling
+> Contributions, suggestions, and improvements are welcome.
+Feel free to fork the repository and submit a pull request.
 
-Mobile-first UI enhancements
+---
 
-Multi-language support
-
-Dark mode
-
-📸 Screenshot
-
-Add your frontend screenshot inside the assets folder and reference it here:
-
-![App Screenshot](assets/screenshot.png)
-👨‍💻 Author
-
-Aman
-Machine Learning Engineer | Full-Stack Developer
-
-📜 License
+## 📜 License
 
 This project is licensed under the MIT License.
 
-🤝 Contribution
+---
 
-Contributions, suggestions, and improvements are welcome.
-Feel free to fork the repository and submit a pull request.
+## 👨‍💻 Author
+Shoaib Ahmad
 
-⭐ Support
+## ⭐ Support
 
-If you found this project useful, consider giving it a star on GitHub.
-
-
-Here is a **shorter GitHub-style version** too, if you want a cleaner README:
-
-```md
-# Tomato Leaf Disease Prediction Frontend
-
-Frontend web application for Tomato Leaf Disease Prediction built with HTML, CSS, and JavaScript.  
-It allows users to upload tomato leaf images, send them to a backend deep learning API, and view predicted disease results with confidence scores.
-
-## Tech Stack
-- HTML
-- CSS
-- JavaScript
-- Flask/FastAPI backend API
-
-## Features
-- Image upload
-- Image preview
-- API integration
-- Prediction display
-- Responsive UI
-
-## Project Structure
-```bash
-├── index.html
-├── style.css
-├── script.js
-├── assets/
-└── README.md
-Run
-
-Open index.html in your browser or run with Live Server.
-
-Backend Endpoint
-
-Update API URL in script.js:
-
-const apiUrl = "http://127.0.0.1:5000/predict";
-Author : RAFIQ
-
-
-For your project, I’d recommend the **first README**, because it looks more professional on GitHub.
-
-I can also prepare the matching `index.html`, `style.css`, and `script.js` structure for this frontend.
+If you found this project useful, consider giving it a ⭐ on GitHub!
