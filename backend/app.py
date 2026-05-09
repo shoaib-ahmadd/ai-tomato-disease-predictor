@@ -11,6 +11,10 @@ app = Flask(__name__)
 CORS(app)
 @app.route("/predict", methods=["POST"])
 def predict():
+    
+    if "image" not in request.files:
+        return jsonify({"error": "No image uploaded"}), 400
+    
     return {
         "prediction": "AI Tomato Disease Backend Running Successfully 🚀"
     }
