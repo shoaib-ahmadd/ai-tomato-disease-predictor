@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import tensorflow as tf
 from tensorflow.keras.models import load_model
-from tensorflow.keras.layers import TFOpLambda
 import numpy as np
 from PIL import Image
 import io
@@ -31,44 +30,41 @@ def home():
 
 @app.route("/health")
 def health():
-    return jsonify({"status": "ok"})
+    return jsonify({
+        "status": "ok"
+    })
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    start_time = time.time()
 
     global model
-
-    # Load model only once
-    if model is None:
-        print("Loading model...")
-
-        model = load_model(
-            MODEL_PATH,
-            compile=False,
-            custom_objects={"TFOpLambda": TFOpLambda}
-        )
-
-        print("Model loaded successfully")
-
-    # Check image
-    if "image" not in request.files:
-        return jsonify({
-            "error": "No image uploaded"
-        }), 400
-
-    file = request.files["image"]
+    start_time = time.time()
 
     try:
+
+        # Load model only once
+        if model is None:
+            print("Loading model...")
+            model = load_model(MODEL_PATH, compile=False)
+            print("Model loaded successfully")
+
+        # Check image exists
+        if "image" not in request.files:
+            return jsonify({
+                "error": "No image uploaded"
+            }), 400
+
+        file = request.files["image"]
+
         # Read image
         image = Image.open(io.BytesIO(file.read())).convert("RGB")
         image = image.resize((IMG_SIZE, IMG_SIZE))
 
-        # Convert to numpy
+        # Convert image to numpy
         img_array = np.array(image)
 
-        # Preprocess
+        # Preprocess image
         img_array = tf.keras.applications.mobilenet_v2.preprocess_input(
             img_array
         )
@@ -76,7 +72,7 @@ def predict():
         # Expand dimensions
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Prediction
+        # Predict
         predictions = model.predict(img_array)
 
         class_names = [
@@ -117,11 +113,17 @@ def predict():
         return jsonify(result)
 
     except Exception as e:
+
         return jsonify({
             "error": str(e)
         }), 500
 
 
 if __name__ == "__main__":
+
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
