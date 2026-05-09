@@ -2,4 +2,3 @@ __pycache__/
 venv/
 .env
 .ipynb_checkpoints/
-backend/model/model.h5
