@@ -9,125 +9,88 @@ import io
 import os
 
 app = Flask(__name__)
-CORS(
-    app,
-    resources={r"/*": {"origins": "*"}},
-    supports_credentials=True
-)
-
-print("Loading AI model...")
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 MODEL_PATH = "model/model.h5"
-model = None
-
 IMG_SIZE = 220
 
-print("MODEL CONFIG READY")
+# ✅ App start hote hi load karo, request pe nahi
+print("Loading AI model at startup...")
+model = load_model(MODEL_PATH, compile=False)
+print("✅ Model loaded successfully!")
 
+class_names = ["Early Blight", "Healthy", "Late Blight"]
 
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "AI Tomato Disease Backend Running Successfully 🚀"
-    })
-
+    return jsonify({"message": "AI Tomato Disease Backend Running 🚀"})
 
 @app.route("/health")
 def health():
-    return jsonify({
-        "status": "ok"
-    })
+    return jsonify({"status": "ok", "model_loaded": model is not None})
 
-
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
+    # ✅ OPTIONS preflight handle karo (CORS ke liye)
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
 
-    global model
     start_time = time.time()
 
     try:
-
-        # Load model only once
-        if model is None:
-            print("Loading model...")
-            model = load_model(MODEL_PATH, compile=False)
-            print("Model loaded successfully")
-
-        # Check image exists
         if "image" not in request.files:
-            return jsonify({
-                "error": "No image uploaded"
-            }), 400
+            return jsonify({"error": "No image uploaded"}), 400
 
         file = request.files["image"]
-
-        # Read image
         image = Image.open(io.BytesIO(file.read())).convert("RGB")
         image = image.resize((IMG_SIZE, IMG_SIZE))
 
-        # Convert image to numpy
         img_array = np.array(image)
-
-        # Preprocess image
-        img_array = tf.keras.applications.mobilenet_v2.preprocess_input(
-            img_array
-        )
-
-        # Expand dimensions
+        img_array = tf.keras.applications.mobilenet_v2.preprocess_input(img_array)
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Predict
         predictions = model.predict(img_array)
-
-        class_names = [
-            "Early Blight",
-            "Healthy",
-            "Late Blight"
-        ]
-
         predicted_index = np.argmax(predictions[0])
         predicted_class = class_names[predicted_index]
-
         confidence = float(np.max(predictions[0]) * 100)
-
         latency = round((time.time() - start_time) * 1000, 2)
 
-        result = {
+        # ✅ Disease-specific advice
+        advice = {
+            "Early Blight": {
+                "caused_by": "Alternaria solani fungus",
+                "spray": ["Copper Oxychloride", "Mancozeb"],
+                "remedy": ["Remove infected leaves", "Avoid overwatering"],
+                "prevention": ["Maintain airflow", "Use disease-free seeds"]
+            },
+            "Late Blight": {
+                "caused_by": "Phytophthora infestans",
+                "spray": ["Metalaxyl", "Chlorothalonil"],
+                "remedy": ["Destroy infected plants", "Apply fungicide immediately"],
+                "prevention": ["Avoid wet foliage", "Crop rotation"]
+            },
+            "Healthy": {
+                "caused_by": "None",
+                "spray": [],
+                "remedy": ["Keep monitoring regularly"],
+                "prevention": ["Continue good practices", "Regular watering"]
+            }
+        }
+
+        disease_info = advice.get(predicted_class, {})
+
+        return jsonify({
             "prediction": predicted_class,
             "confidence": round(confidence, 2),
             "latency": f"{latency} ms",
-            "caused_by": "fungal infection",
-
-            "spray": [
-                "Copper Oxychloride",
-                "Mancozeb"
-            ],
-
-            "remedy": [
-                "Remove infected leaves",
-                "Avoid overwatering"
-            ],
-
-            "prevention": [
-                "Maintain airflow",
-                "Use disease-free seeds"
-            ]
-        }
-
-        return jsonify(result)
+            **disease_info
+        })
 
     except Exception as e:
-
-        return jsonify({
-            "error": str(e)
-        }), 500
-
+        print(f"Prediction error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-
     port = int(os.environ.get("PORT", 5000))
-
-    app.run(
-        host="0.0.0.0",
-        port=port
-    )
+    app.run(host="0.0.0.0", port=port)
+    
