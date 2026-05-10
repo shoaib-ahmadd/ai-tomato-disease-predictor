@@ -130,11 +130,12 @@ AI-Tomato-Disease-Predictor/
 │   └── model/
 │       └── model.h5
 │
-├── screenshots/
-│   ├── UI.png
-│   ├── Early.png
-│   ├── Late.png
-│   └── Healthy.png
+├── assets/
+│   └── screenshots/
+│       ├── UI.png
+│       ├── Early.png
+│       ├── Late.png
+│       └── Healthy.png
 │
 ├── README.md
 └── .gitignore
