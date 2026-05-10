@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="screenshots/UI.png" alt="Tomato Disease Detection App" width="100%" />
+<img src="assets/screenshots/UI.png" alt="Tomato Disease Detection App" width="100%" />
 
 <br/>
 <br/>
@@ -58,22 +58,22 @@ The project was trained on more than **7,500 tomato leaf images** across multipl
 <div align="center">
 
 ### Application Interface
-<img src="screenshots/UI.png" width="90%" alt="UI Screenshot"/>
+<img src="assets/screenshots/UI.png" width="90%" alt="UI Screenshot"/>
 
 <br/><br/>
 
 ### Early Blight Detection
-<img src="screenshots/Early.png" width="90%" alt="Early Blight"/>
+<img src="assets/screenshots/Early.png" width="90%" alt="Early Blight"/>
 
 <br/><br/>
 
 ### Late Blight Detection
-<img src="screenshots/Late.png" width="90%" alt="Late Blight"/>
+<img src="assets/screenshots/Late.png" width="90%" alt="Late Blight"/>
 
 <br/><br/>
 
 ### Healthy Leaf Detection
-<img src="screenshots/Healthy.png" width="90%" alt="Healthy Leaf"/>
+<img src="assets/screenshots/Healthy.png" width="90%" alt="Healthy Leaf"/>
 
 </div>
 
