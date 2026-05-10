@@ -1,15 +1,6 @@
 # AI Tomato Leaf Disease Detection System
 
-<div align="center">
-
-<img src="assets/screenshots/UI.png" alt="Tomato Disease Detection App" width="100%" />
-
-<br/>
-<br/>
-
-<h3>Deep Learning Based Plant Disease Classification using TensorFlow & Flask</h3>
-
-<br/>
+<h3>AI Powered Tomato Leaf Disease Prediction using Machine Learning</h3>
 
 <!-- GitHub Stats -->
 <img src="https://img.shields.io/github/stars/shoaib-ahmadd/AI-Tomato-Disease-Predictor?style=for-the-badge&color=yellow" />
